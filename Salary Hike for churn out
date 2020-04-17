@@ -1,0 +1,54 @@
+Emp_data -> Build a prediction model for Churn_out_rate 
+
+ed <- read.csv("emp_data.csv")
+View(ed)
+colnames(ed) <- c("SH","COR")
+colnames(ed)
+attach(ed)
+
+# EDA - Exploratory Data Analysis.
+qqnorm(SH)
+qqline(SH)
+qqnorm(COR)
+qqline(COR)
+hist(SH)
+hist(COR)
+boxplot(SH, horizontal = T)
+boxplot(COR, horizontal = T)
+plot(density(SH))
+plot(density(COR))
+
+# Scatter Plot
+plot(COR, SH)
+# Graph shows strong negative correlation between both the variables
+
+cor(COR, SH)
+# Correlation value is -0.91 which shows strong correlation between the variables
+
+# Regression check
+reg_ed <- lm(COR ~ SH)
+summary(reg_ed)
+# R^2 value is 0.83 which is a best fit model.
+#We can write eq. as SH=244.36+(-0.10)*SH
+
+# Check fitted values of predicted
+reg_sh$fitted.values 
+
+# check for associated errors
+reg_sh$residuals
+sum(reg_sh$residuals)
+
+# Confidence interval for 95%
+confint(reg_ed, level = 0.95)
+
+# List down the predicted values along with lsl and usl
+predict(reg_ed, interval = "predict") # See predicted values with confidence interval.
+
+# Calculation on Y = B0 + B1*x for prediction check
+244.36+(-0.101)*1580
+244.36+(-0.101)*1640
+
+# From the provided data set, the correlation value is -0.91 where both variables are strong and negatively correlated.
+# Co-ef. are significant and co-ef.of Determination value. i.e R^2 is 0.96 which is good.
+# sum of errors is -7.844392e-12 i.e approx 0 and errors are equally distributed.
+# Hence model is best fit and salary hike is an appropriate input to determine churn out rate.
